@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-w4ZkqXTj0yLLE8X9V6zGGnqwpEPpX96FVp/tN7ydXSg='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Piel al día</title>
+<meta name="theme-color" content="#FCF6F3">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<style>
+:root{--bg:#FCF6F3;--card:#fff;--ink:#3A4A4E;--mut:#6B7D81;--teal:#3E8778;--tealb:#DDF1EA;--sun:#FCE6B0;--line:#F0E2DD;--btn:#BFE3D8;--btnink:#2A3B3F;--bad:#9A4638;--badb:#FADFD8;--warn:#7A5A10;--warnb:#FDF0CF;--good:#2F6B55;--goodb:#DDF1E6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1F23;--btn:#5CC4BE;--btnink:#0E1F23;--card:#16302F;--ink:#E6F2F1;--mut:#97B3B3;--teal:#5CC4BE;--tealb:#1D4442;--line:#2A4846;--bad:#F0A89B;--badb:#4A2620;--warn:#F2CB72;--warnb:#463710;--good:#8EDDB0;--goodb:#1B4030}}
+:root[data-theme="dark"]{--bg:#0E1F23;--btn:#5CC4BE;--btnink:#0E1F23;--card:#16302F;--ink:#E6F2F1;--mut:#97B3B3;--teal:#5CC4BE;--tealb:#1D4442;--line:#2A4846;--bad:#F0A89B;--badb:#4A2620;--warn:#F2CB72;--warnb:#463710;--good:#8EDDB0;--goodb:#1B4030}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body,button,a,select{-webkit-tap-highlight-color:transparent}
+button,a,select,summary,.chip{touch-action:manipulation}
+
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,"Segoe UI",system-ui,sans-serif;padding-bottom:100px}
+h1,h2,h3{font-family:ui-rounded,"Avenir Next","Segoe UI",system-ui,"Segoe UI",system-ui,sans-serif;line-height:1.15;margin:0}
+header{padding:20px 20px 8px;max-width:560px;margin:0 auto}
+header h1{font-size:30px}
+header p{margin:4px 0 0;color:var(--mut)}
+main{max-width:560px;margin:0 auto;padding:8px 20px 24px}
+section[hidden]{display:none}
+h2{font-size:22px;margin:16px 0 4px}
+.sub{color:var(--mut);margin:0 0 14px;font-size:15px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h3{font-size:18px;margin-bottom:8px}
+.step{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:12px 2px;font:inherit;color:inherit;cursor:pointer;min-height:48px}
+.step:first-of-type{border-top:0}
+.box{width:26px;height:26px;border-radius:8px;border:2px solid var(--teal);flex:none;display:grid;place-items:center;color:#fff;font-weight:700}
+.step[aria-pressed=true] .box{background:var(--teal)}
+.step[aria-pressed=true] .t{color:var(--mut);text-decoration:line-through}
+.streak{display:flex;align-items:baseline;gap:8px;background:var(--sun);color:#2B2208;border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.streak b{font:700 34px ui-rounded,"Avenir Next","Segoe UI",sans-serif}
+label{display:block;font-weight:600;margin:12px 0 6px}
+select,textarea,input[type=text],input[type=password]{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px}
+textarea{min-height:76px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;min-height:40px}
+.chip[aria-pressed=true]{background:var(--tealb);border-color:var(--teal);font-weight:600}
+.btn{font:600 16px system-ui,"Segoe UI",sans-serif;background:var(--btn);color:var(--btnink);border:0;border-radius:12px;padding:12px 18px;cursor:pointer;min-height:46px}
+.btn.alt{background:var(--tealb);color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn:not(.alt),:root:not([data-theme="light"]) .step[aria-pressed=true] .box{color:#0E1F23}}
+:root[data-theme="dark"] .btn:not(.alt),:root[data-theme="dark"] .step[aria-pressed=true] .box{color:#0E1F23}
+.big{font:700 40px ui-rounded,"Avenir Next","Segoe UI",sans-serif;color:var(--teal)}
+.tag{display:inline-block;border-radius:8px;padding:2px 10px;font-weight:600;font-size:14px;margin-right:6px}
+.ok{background:var(--goodb);color:var(--good)}.sep{background:var(--warnb);color:var(--warn)}.no{background:var(--badb);color:var(--bad)}
+.res{padding:10px 0;border-top:1px solid var(--line)}
+.res:first-child{border-top:0}
+details{border-top:1px solid var(--line);padding:10px 0}
+details:first-of-type{border-top:0}
+summary{font-weight:600;cursor:pointer;min-height:32px}
+details p{margin:6px 0 0;color:var(--mut);font-size:15px}
+.entry{display:flex;gap:12px;border-top:1px solid var(--line);padding:12px 0}
+.entry img{width:84px;height:84px;object-fit:cover;border-radius:10px;flex:none}
+.nt{white-space:pre-wrap;overflow-wrap:anywhere}
+.entry small{color:var(--mut)}
+.link{background:none;border:0;color:var(--bad);font:inherit;cursor:pointer;padding:4px 0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;max-width:120px;font:500 12.5px system-ui,"Segoe UI",sans-serif;line-height:1.15;color:var(--mut);background:none;border:0;padding:10px 2px;cursor:pointer;min-height:54px}
+nav button[aria-current=page]{color:var(--teal);font-weight:700;box-shadow:inset 0 3px 0 var(--teal)}
+nav .i{display:block;font-size:20px;line-height:1.1}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+a.btn{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none}
+.foot{color:var(--mut);font-size:13px;text-align:center;margin-top:18px}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:520px){
+header{padding:16px 16px 4px}header h1{font-size:27px}
+main{padding:6px 16px 24px}
+.card{padding:14px;border-radius:16px}
+.cgrid{grid-template-columns:1fr}
+.chip{min-height:44px;padding:9px 14px}
+.step{min-height:56px}
+select,textarea,input[type=text],input[type=password]{padding:13px 12px}
+.btn{width:100%}
+#guardar,#tgo,#tstop,#qgo{width:100%}
+.big{font-size:36px}
+nav button{font-size:11px;min-height:58px}
+nav .i{font-size:19px}
+}
+</style>
+</head>
+<body>
+<header><h1>Piel al día</h1><p>Tu rutina, tu protección solar y tu progreso, en un solo lugar.</p></header>
+<main>
+<section id="hoy">
+  <div class="streak"><b id="racha">0</b><span id="rachaT">días seguidos con rutina completa</span></div>
+  <div class="card"><h3>Mañana</h3><div id="am"></div></div>
+  <div class="card"><h3>Noche</h3><div id="pm"></div></div>
+</section>
+
+<section id="sol" hidden>
+  <h2>Protección solar</h2>
+  <p class="sub">Revisa el índice UV en la app del clima de tu ciudad y elígelo aquí.</p>
+  <div class="card">
+    <label for="foto">Tu fototipo</label>
+    <select id="foto"></select>
+    <label for="uv">Índice UV de hoy</label>
+    <select id="uv"></select>
+    <div id="solRes" style="margin-top:16px"></div>
+  </div>
+  <div class="card">
+    <h3>Recordatorio de reaplicación</h3>
+    <div class="big" id="clock">2:00:00</div>
+    <p class="sub">Funciona mientras la app esté abierta.</p>
+    <button class="btn" id="tgo">Ya me apliqué</button>
+    <button class="btn alt" id="tstop" hidden>Detener</button>
+  </div>
+</section>
+
+<section id="diario" hidden>
+  <h2>Diario de piel</h2>
+  <p class="sub">Tus fotos y notas se guardan solo en este teléfono. No se envían a ningún servidor.</p>
+  <div class="card" id="lockCard" hidden>
+    <h3>Diario bloqueado</h3>
+    <label for="pinIn">Tu clave</label>
+    <input type="password" id="pinIn" autocomplete="off" maxlength="64">
+    <p style="margin:12px 0 0"><button class="btn" id="unlock">Desbloquear</button></p>
+    <p class="sub" id="lmsg" role="status" style="margin-top:8px"></p>
+    <p style="margin:12px 0 0"><button class="btn alt" id="wipe2">Olvidé mi clave: borrar el diario</button></p>
+  </div>
+  <div id="diaryBody">
+    <p class="sub">Toma la foto con la misma luz y a la misma distancia para comparar mejor.</p>
+    <div class="card">
+      <label for="img">Foto</label>
+      <input type="file" id="img" accept="image/jpeg,image/png,image/webp">
+      <label>¿Cómo está tu piel hoy?</label>
+      <div class="chips" id="moods"></div>
+      <label for="nota">Notas (productos nuevos, sueño, estrés, ciclo)</label>
+      <textarea id="nota" maxlength="1000"></textarea>
+      <p style="margin:12px 0 0"><button class="btn" id="guardar">Guardar entrada</button></p>
+      <p class="sub" id="dmsg" role="status" style="margin-top:8px"></p>
+    </div>
+    <div class="card" id="lista"></div>
+    <div class="card">
+      <h3>Privacidad</h3>
+      <div id="secOff">
+        <p class="sub">Si compartes el teléfono, protege el diario con una clave. Si la olvidas, el diario no se puede recuperar.</p>
+        <label for="pin1">Crea una clave (mínimo 8 caracteres)</label>
+        <input type="password" id="pin1" autocomplete="new-password" maxlength="64">
+        <label for="pin2">Repite la clave</label>
+        <input type="password" id="pin2" autocomplete="new-password" maxlength="64">
+        <p style="margin:12px 0 0"><button class="btn alt" id="setpin">Proteger con clave</button></p>
+      </div>
+      <div id="secOn" hidden>
+        <p class="sub">Tu diario está protegido con clave y se bloquea solo tras 5 minutos sin uso.</p>
+        <p style="margin:0 0 10px"><button class="btn alt" id="lockNow">Bloquear ahora</button></p>
+        <p style="margin:0 0 10px"><button class="btn alt" id="rmpin">Quitar la clave</button></p>
+      </div>
+      <p style="margin:0"><button class="btn alt" id="wipe">Borrar todos mis datos</button></p>
+      <p class="sub" id="smsg" role="status" style="margin-top:8px"></p>
+    </div>
+  </div>
+</section>
+
+<section id="activos" hidden>
+  <h2>Activos</h2>
+  <p class="sub">Elige los que usas y mira cómo combinarlos.</p>
+  <div class="card">
+    <h3>¿Se pueden usar juntos?</h3>
+    <div class="chips" id="achips"></div>
+    <div id="cres" style="margin-top:12px"></div>
+  </div>
+  <div class="card"><h3>Guía de ingredientes</h3><div id="guia"></div></div>
+</section>
+
+<section id="piel" hidden>
+  <h2>Mi tipo de piel</h2>
+  <p class="sub">Tres preguntas y una rutina base de orientación.</p>
+  <div class="card">
+    <label for="q1">Dos horas después de lavarte la cara, tu piel se siente…</label>
+    <select id="q1"><option value="">Elige</option><option value="seca">Tirante o con descamación</option><option value="normal">Cómoda, ni seca ni brillante</option><option value="mixta">Brillante solo en frente y nariz</option><option value="grasa">Brillante en toda la cara</option></select>
+    <label for="q2">¿Se enrojece o te arde con facilidad con productos nuevos?</label>
+    <select id="q2"><option value="">Elige</option><option value="si">Sí</option><option value="no">No</option></select>
+    <label for="q3">¿Con qué frecuencia tienes granos?</label>
+    <select id="q3"><option value="">Elige</option><option value="a">Casi siempre tengo</option><option value="b">A veces</option><option value="c">Rara vez</option></select>
+    <p style="margin:14px 0 0"><button class="btn" id="qgo">Ver resultado</button></p>
+  </div>
+  <div id="qres"></div>
+</section>
+<section id="contacto" hidden>
+<h2>Consulta médica</h2>
+<div class="card">
+  <h3>Consulta con la Dra. Eukarys Fernández</h3>
+  <p class="sub" style="margin:0">Si tu piel cambia o quieres una evaluación personalizada, escríbeme o agenda una consulta.</p>
+  <div class="cgrid">
+    <a class="btn" href="https://midocdoc.com/especialista/dra-eukarys-fernandez-femayor/" target="_blank" rel="noopener noreferrer">Agendar consulta</a>
+    <a class="btn alt" href="mailto:draeukarysfernandez@gmail.com">Escribir por correo</a>
+    <a class="btn alt" href="https://dermaaps.polsia.io/" target="_blank" rel="noopener noreferrer">Mi página web</a>
+    <a class="btn alt" href="https://www.instagram.com/dra.fernandezf/" target="_blank" rel="noopener noreferrer">Instagram @dra.fernandezf</a>
+  </div>
+  <p class="sub" style="margin:10px 0 0;font-size:14px">Correo: draeukarysfernandez@gmail.com</p>
+</div>
+</section>
+<p class="foot">Información educativa. No reemplaza una consulta médica. Si algo cambia, duele o sangra, consulta.</p>
+</main>
+<nav id="nav"></nav>
+
+<script>
+'use strict';const $=s=>document.querySelector(s);
+const sg=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const ss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}};
+const rm=k=>{try{localStorage.removeItem(k)}catch(e){}};
+const clamp=(v,a,b,d)=>Number.isInteger(v)&&v>=a&&v<=b?v:d;
+function cleanLog(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o)){for(const k of Object.keys(o).slice(-400)){if(!/^\d{4}-\d{2}-\d{2}$/.test(k))continue;const v=o[k]||{};const f=a=>Array.isArray(a)?[...new Set(a.filter(n=>Number.isInteger(n)&&n>=0&&n<10))]:[];r[k]={am:f(v.am),pm:f(v.pm)}}}return r}
+const today=()=>new Date().toLocaleDateString('en-CA');
+
+/* Navegación */
+const tabs=[['piel','🪞','Mi piel'],['hoy','🧴','Hoy'],['sol','☀️','Sol'],['diario','📷','Diario'],['activos','🧪','Activos'],['contacto','💬','Consulta médica']];
+$('#nav').innerHTML=tabs.map(t=>`<button data-t="${t[0]}"><span class="i" aria-hidden="true">${t[1]}</span>${t[2]}</button>`).join('');
+function go(id){tabs.forEach(t=>{$('#'+t[0]).hidden=t[0]!==id});document.querySelectorAll('#nav button').forEach(b=>{if(b.dataset.t===id)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});window.scrollTo(0,0)}
+$('#nav').onclick=e=>{const b=e.target.closest('button');if(b)go(b.dataset.t)};
+go('piel');
+
+/* Rutina */
+const R={am:['Limpiar el rostro','Sérum o tratamiento de la mañana','Hidratante','Fotoprotector'],pm:['Limpiar (o desmaquillar y limpiar)','Sérum','Tratamiento de la noche','Hidratante']};
+let log=cleanLog(sg('pd_log',{}));
+const done=(d,k)=>{const l=log[d]||{};return R[k].every((_,i)=>(l[k]||[]).includes(i))};
+function drawRoutine(){
+  const d=today();log[d]=log[d]||{am:[],pm:[]};
+  ['am','pm'].forEach(k=>{$('#'+k).innerHTML=R[k].map((s,i)=>{const on=log[d][k].includes(i);return `<button class="step" data-k="${k}" data-i="${i}" aria-pressed="${on}"><span class="box" aria-hidden="true">${on?'✓':''}</span><span class="t">${s}</span></button>`}).join('')});
+  let n=0,dt=new Date();
+  const ok=x=>done(x.toLocaleDateString('en-CA'),'am')||done(x.toLocaleDateString('en-CA'),'pm');
+  if(!ok(dt))dt.setDate(dt.getDate()-1);
+  while(ok(dt)){n++;dt.setDate(dt.getDate()-1)}
+  $('#racha').textContent=n;
+  $('#rachaT').textContent=n===1?'día con rutina completa':'días seguidos con rutina completa';
+}
+['#am','#pm'].forEach(s=>$(s).onclick=e=>{const b=e.target.closest('.step');if(!b)return;const d=today(),a=log[d][b.dataset.k],i=+b.dataset.i;const p=a.indexOf(i);p<0?a.push(i):a.splice(p,1);ss('pd_log',log);drawRoutine()});
+drawRoutine();
+
+/* Sol */
+const FT=[['I','Piel muy clara, siempre se quema, nunca se broncea'],['II','Piel clara, se quema fácil, se broncea poco'],['III','Piel media, a veces se quema, se broncea gradualmente'],['IV','Piel morena clara, rara vez se quema'],['V','Piel morena, muy rara vez se quema'],['VI','Piel oscura, casi nunca se quema']];
+const UV=[['Bajo (1–2)',0],['Moderado (3–5)',1],['Alto (6–7)',2],['Muy alto (8–10)',3],['Extremo (11 o más)',4]];
+$('#foto').innerHTML=FT.map((f,i)=>`<option value="${i}">Tipo ${f[0]}: ${f[1]}</option>`).join('');
+$('#uv').innerHTML=UV.map(u=>`<option value="${u[1]}">${u[0]}</option>`).join('');
+$('#foto').value=clamp(sg('pd_ft',2),0,5,2);$('#uv').value=clamp(sg('pd_uv',3),0,4,3);
+function drawSol(){
+  const f=+$('#foto').value,u=+$('#uv').value;ss('pd_ft',f);ss('pd_uv',u);
+  const fps=(u>=2||f<=1)?'FPS 50+':'FPS 30 o más';
+  const extra=u>=3?'Evita el sol directo entre las 11:00 y las 16:00, usa sombrero y lentes.':u===2?'Busca sombra en las horas centrales del día.':'Aun con UV bajo, úsalo si estarás varias horas afuera.';
+  $('#solRes').innerHTML=`<div class="big">${fps}</div><p style="margin:6px 0">Aplica una cantidad generosa en rostro, cuello y orejas 15 minutos antes de salir. Reaplica cada 2 horas, y después de sudar o nadar.</p><p style="margin:6px 0;color:var(--mut)">${extra}</p>`;
+}
+$('#foto').onchange=$('#uv').onchange=drawSol;drawSol();
+let tm=null,left=0;
+const fmt=s=>`${Math.floor(s/3600)}:${String(Math.floor(s%3600/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+$('#tgo').onclick=()=>{clearInterval(tm);left=7200;$('#tstop').hidden=false;$('#tgo').textContent='Reiniciar';
+  tm=setInterval(()=>{left--;$('#clock').textContent=fmt(Math.max(left,0));if(left<=0){clearInterval(tm);$('#clock').textContent='¡Hora de reaplicar!'}},1000);$('#clock').textContent=fmt(left)};
+$('#tstop').onclick=()=>{clearInterval(tm);$('#clock').textContent='2:00:00';$('#tstop').hidden=true;$('#tgo').textContent='Ya me apliqué'};
+
+/* Diario */
+const MOODS=['Tranquila','Seca o tirante','Irritada','Con brote','Brillante'];
+const MAXE=60,MAXP=400000,OKT=['image/jpeg','image/png','image/webp'];
+const IMG=/^data:image\/jpeg;base64,[A-Za-z0-9+\/]+={0,2}$/;
+function cleanDiary(a){return (Array.isArray(a)?a:[]).slice(0,MAXE).map(x=>x&&typeof x==='object'?{d:String(x.d||'').slice(0,40),p:typeof x.p==='string'&&x.p.length<MAXP&&IMG.test(x.p)?x.p:'',m:MOODS.includes(x.m)?x.m:'',n:String(x.n||'').slice(0,1000)}:null).filter(Boolean)}
+let mood='',photo='',diary=[],key=null,salt=null,fails=0,until=0,idle=0;
+const encOn=()=>{try{return !!localStorage.getItem('pd_diary_enc')}catch(e){return false}};
+const CR=window.crypto&&window.crypto.subtle;
+const bin2b=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s)};
+const b2bin=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0));
+async function derive(pw,sl){const m=await CR.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return CR.deriveKey({name:'PBKDF2',salt:sl,iterations:310000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function seal(){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=new Uint8Array(await CR.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(diary))));return ss('pd_diary_enc',{v:1,s:bin2b(salt),i:bin2b(iv),c:bin2b(ct)})}
+async function persist(){return key?seal():ss('pd_diary',diary)}
+function bump(){clearTimeout(idle);if(key)idle=setTimeout(lock,300000)}
+['pointerdown','keydown','input'].forEach(ev=>document.addEventListener(ev,bump,{passive:true}));
+window.addEventListener('pagehide',()=>{if(key)lock()});
+function lock(){clearTimeout(idle);key=null;salt=null;diary=[];photo='';mood='';$('#nota').value='';$('#img').value='';view()}
+function view(){const enc=encOn(),locked=enc&&!key;$('#lockCard').hidden=!locked;$('#diaryBody').hidden=locked;$('#secOff').hidden=enc;$('#secOn').hidden=!enc;drawDiary()}
+function drawDiary(){
+  const L=$('#lista');L.replaceChildren();
+  if(!diary.length){const p=document.createElement('p');p.className='sub';p.style.margin='0';p.textContent='Aún no hay entradas. Guarda la primera para empezar a ver tu progreso.';L.append(p);return}
+  diary.forEach((x,i)=>{
+    const e=document.createElement('div');e.className='entry';
+    if(x.p){const im=document.createElement('img');im.src=x.p;im.alt='Foto del '+x.d;e.append(im)}
+    const c=document.createElement('div'),b=document.createElement('b');b.textContent=x.d;c.append(b,' ');
+    if(x.m){const t=document.createElement('span');t.className='tag ok';t.textContent=x.m;c.append(t)}
+    const n=document.createElement('div');n.className='nt';n.textContent=x.n;c.append(n);
+    const bt=document.createElement('button');bt.className='link';bt.dataset.i=i;bt.textContent='Eliminar';c.append(bt);
+    e.append(c);L.append(e)});
+}
+$('#moods').innerHTML=MOODS.map(m=>`<button class="chip" aria-pressed="false">${m}</button>`).join('');
+$('#moods').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;mood=b.textContent;document.querySelectorAll('#moods .chip').forEach(c=>c.setAttribute('aria-pressed',c===b))};
+$('#img').onchange=e=>{
+  const f=e.target.files[0],m=$('#dmsg');photo='';m.textContent='';if(!f)return;
+  if(!OKT.includes(f.type)){m.textContent='Usa una foto en formato JPG, PNG o WebP.';$('#img').value='';return}
+  if(f.size>15e6){m.textContent='La foto pesa demasiado (máximo 15 MB).';$('#img').value='';return}
+  const r=new FileReader();
+  r.onerror=()=>{m.textContent='No se pudo leer la foto.'};
+  r.onload=()=>{const im=new Image();
+    im.onerror=()=>{m.textContent='No se pudo abrir la foto.';$('#img').value=''};
+    im.onload=()=>{
+      if(!im.width||!im.height||im.width*im.height>1e8){m.textContent='La foto es demasiado grande.';$('#img').value='';return}
+      const s=Math.min(1,480/Math.max(im.width,im.height)),c=document.createElement('canvas');
+      c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));
+      c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+      photo=c.toDataURL('image/jpeg',.6);
+      if(photo.length>=MAXP){photo='';m.textContent='No se pudo reducir la foto. Prueba con otra.';$('#img').value=''}};
+    im.src=r.result};
+  r.readAsDataURL(f)};
+$('#lista').onclick=async e=>{const b=e.target.closest('.link');if(!b)return;const i=+b.dataset.i;if(!Number.isInteger(i))return;diary.splice(i,1);await persist();drawDiary()};
+$('#guardar').onclick=async()=>{
+  const n=$('#nota').value.trim().slice(0,1000),m=$('#dmsg');
+  if(!photo&&!mood&&!n){m.textContent='Agrega una foto, un estado o una nota para guardar.';return}
+  if(diary.length>=MAXE){m.textContent='Llegaste al máximo de '+MAXE+' entradas. Elimina alguna para seguir.';return}
+  const prev=diary.slice();
+  diary.unshift({d:new Date().toLocaleDateString('es',{day:'numeric',month:'long',year:'numeric'}),p:photo,m:mood,n});
+  const ok=await persist();
+  if(!ok){diary=prev;m.textContent='No se pudo guardar: el espacio del dispositivo está lleno. Elimina entradas antiguas.';return}
+  m.textContent='Entrada guardada en este dispositivo.';
+  photo='';mood='';$('#nota').value='';$('#img').value='';document.querySelectorAll('#moods .chip').forEach(c=>c.setAttribute('aria-pressed','false'));drawDiary();
+};
+async function unlock(){
+  const m=$('#lmsg'),pw=$('#pinIn').value;
+  if(Date.now()<until){m.textContent='Demasiados intentos. Espera unos segundos.';return}
+  if(!pw||!CR)return;
+  try{
+    const E=sg('pd_diary_enc',null);
+    if(!E||typeof E.s!=='string'||typeof E.i!=='string'||typeof E.c!=='string')throw new Error('datos');
+    const sl=b2bin(E.s),k=await derive(pw,sl);
+    const pt=await CR.decrypt({name:'AES-GCM',iv:b2bin(E.i)},k,b2bin(E.c));
+    diary=cleanDiary(JSON.parse(new TextDecoder().decode(pt)));key=k;salt=sl;fails=0;
+    $('#pinIn').value='';m.textContent='';bump();view();
+  }catch(err){
+    fails++;
+    if(fails>=5){until=Date.now()+30000;fails=0;m.textContent='Demasiados intentos. Espera 30 segundos.'}
+    else m.textContent='Clave incorrecta.';
+  }
+}
+$('#unlock').onclick=unlock;
+$('#pinIn').onkeydown=e=>{if(e.key==='Enter')unlock()};
+$('#setpin').onclick=async()=>{
+  const a=$('#pin1').value,b=$('#pin2').value,m=$('#smsg');
+  if(!CR){m.textContent='Este navegador no permite proteger el diario con clave.';return}
+  if(a.length<8){m.textContent='La clave debe tener al menos 8 caracteres.';return}
+  if(a!==b){m.textContent='Las dos claves no coinciden.';return}
+  m.textContent='Protegiendo tu diario…';
+  try{
+    salt=crypto.getRandomValues(new Uint8Array(16));key=await derive(a,salt);
+    if(!(await seal()))throw new Error('espacio');
+    rm('pd_diary');$('#pin1').value='';$('#pin2').value='';
+    m.textContent='Listo. Tu diario ahora está cifrado en este teléfono.';bump();view();
+  }catch(err){key=null;salt=null;m.textContent='No se pudo activar la protección. Tus datos siguen como estaban.'}
+};
+$('#rmpin').onclick=()=>{
+  const m=$('#smsg');if(!key)return;
+  if(ss('pd_diary',diary)){rm('pd_diary_enc');lock();m.textContent='Se quitó la clave. El diario ya no está cifrado.'}
+  else m.textContent='No se pudo quitar la clave por falta de espacio. Elimina entradas e inténtalo de nuevo.';
+};
+$('#lockNow').onclick=lock;
+function twoStep(btn,label,fn){let t=0;btn.onclick=()=>{if(!t){t=setTimeout(()=>{t=0;btn.textContent=label},5000);btn.textContent='Toca otra vez para confirmar';return}clearTimeout(t);t=0;btn.textContent=label;fn()}}
+function wipe(){['pd_log','pd_ft','pd_uv','pd_diary','pd_diary_enc'].forEach(rm);clearTimeout(idle);key=null;salt=null;diary=[];log={};photo='';mood='';fails=0;until=0;$('#nota').value='';$('#img').value='';$('#smsg').textContent='Se borraron todos tus datos de este teléfono.';view();drawRoutine()}
+twoStep($('#wipe'),'Borrar todos mis datos',wipe);
+function wipeDiary(){['pd_diary','pd_diary_enc'].forEach(rm);clearTimeout(idle);key=null;salt=null;diary=[];photo='';mood='';fails=0;until=0;$('#lmsg').textContent='';$('#smsg').textContent='Se borró el diario de este teléfono.';view()}
+twoStep($('#wipe2'),'Olvidé mi clave: borrar el diario',wipeDiary);
+diary=encOn()?[]:cleanDiary(sg('pd_diary',[]));
+view();
+
+/* Activos */
+const A={ret:['Retinoides','Estimulan la renovación de la piel. Ayudan con acné, manchas y signos de la edad.','Piel con acné, manchas o fotoenvejecimiento.','Introdúcelos de a poco (2 noches por semana). Pueden irritar y aumentan la sensibilidad al sol. No se usan en el embarazo.'],
+vitc:['Vitamina C','Antioxidante que ilumina y ayuda a proteger del daño solar.','Piel opaca, con manchas o expuesta al sol.','Mejor en la mañana, antes del fotoprotector. Puede arder en piel sensible.'],
+acid:['Ácidos AHA/BHA','Exfolian suavemente. El salicílico (BHA) entra en el poro y sirve para puntos negros y grasa.','Piel grasa, con puntos negros o textura irregular.','No abuses: más no es mejor. Usa fotoprotector todos los días. Consulta si estás embarazada.'],
+bpo:['Peróxido de benzoílo','Reduce las bacterias del acné y los granos inflamados.','Acné con granos rojos.','Reseca y puede manchar telas. Empieza con baja concentración.'],
+nia:['Niacinamida','Calma, regula la grasa y refuerza la barrera de la piel.','Casi todos los tipos de piel, incluida la sensible.','Muy bien tolerada. Si arde, baja la concentración.'],
+ha:['Ácido hialurónico','Atrae agua y deja la piel hidratada y flexible.','Todos los tipos de piel.','Aplícalo sobre la piel ligeramente húmeda y sella con crema.'],
+cer:['Ceramidas','Refuerzan la barrera que protege la piel y evitan que pierda agua.','Piel seca, sensible o en tratamiento con activos irritantes.','Muy seguras. Son un buen apoyo si usas retinoides o ácidos.']};
+const P={'ret|acid':['no','No los uses la misma noche. Alterna días.'],'bpo|ret':['sep','Pueden irritar juntos. Peróxido en la mañana y retinoide en la noche.'],'ret|vitc':['sep','Mejor separar: vitamina C en la mañana y retinoide en la noche.'],'acid|vitc':['sep','Pueden irritar. Úsalos en momentos o días distintos.'],'acid|bpo':['no','Mucha irritación junta. No los uses el mismo día.'],'bpo|vitc':['sep','El peróxido puede oxidar la vitamina C. Úsalos en momentos distintos.']};
+const LB={ok:'Compatible',sep:'Mejor separar',no:'Evitar juntos'};
+let sel=[];
+$('#achips').innerHTML=Object.keys(A).map(k=>`<button class="chip" data-k="${k}" aria-pressed="false">${A[k][0]}</button>`).join('');
+$('#achips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;const k=b.dataset.k,p=sel.indexOf(k);p<0?sel.push(k):sel.splice(p,1);b.setAttribute('aria-pressed',p<0);drawC()};
+function drawC(){
+  if(sel.length<2){$('#cres').innerHTML='<p class="sub" style="margin:0">Elige al menos dos activos.</p>';return}
+  let h='';for(let i=0;i<sel.length;i++)for(let j=i+1;j<sel.length;j++){const a=sel[i],b=sel[j],r=P[a+'|'+b]||P[b+'|'+a]||['ok','Se llevan bien. Introduce uno nuevo a la vez para notar cómo responde tu piel.'];h+=`<div class="res"><span class="tag ${r[0]}">${LB[r[0]]}</span><b>${A[a][0]} + ${A[b][0]}</b><div style="color:var(--mut);font-size:15px">${r[1]}</div></div>`}
+  $('#cres').innerHTML=h;
+}
+drawC();
+$('#guia').innerHTML=Object.values(A).map(a=>`<details><summary>${a[0]}</summary><p><b>Qué hace:</b> ${a[1]}</p><p><b>Para quién:</b> ${a[2]}</p><p><b>Ojo con:</b> ${a[3]}</p></details>`).join('');
+
+/* Test de piel */
+const T={seca:['Piel seca','Limpiador suave sin espuma intensa, hidratante con ceramidas y ácido hialurónico, fotoprotector hidratante.'],normal:['Piel normal','Limpiador suave, hidratante ligera y fotoprotector. Puedes sumar vitamina C en la mañana.'],mixta:['Piel mixta','Limpiador suave, hidratante en gel o ligera, niacinamida y fotoprotector de textura fluida.'],grasa:['Piel grasa','Limpiador en gel, niacinamida, hidratante oil-free y fotoprotector en gel o fluido. Un BHA puede ayudar.']};
+$('#qgo').onclick=()=>{
+  const a=$('#q1').value,s=$('#q2').value,g=$('#q3').value;
+  if(!a||!s||!g||!T[a]){$('#qres').innerHTML='<div class="card">Responde las tres preguntas para ver tu resultado.</div>';return}
+  let h=`<div class="card"><div class="big" style="font-size:30px">${T[a][0]}</div><p>${T[a][1]}</p>`;
+  if(s==='si')h+='<p><span class="tag sep">Piel sensible</span>Introduce un producto nuevo cada 2 semanas y prueba primero en una zona pequeña. Evita fragancias y exfoliantes fuertes.</p>';
+  if(g==='a')h+='<p><span class="tag sep">Acné frecuente</span>Es buena idea que te evalúe un médico para indicar un tratamiento adecuado. No exprimas los granos.</p>';
+  h+='<p class="sub" style="margin:8px 0 0">Resultado orientativo. Tu médica puede ajustarlo a tu caso.</p></div>';
+  $('#qres').innerHTML=h;
+};
+</script>
+</body>
+</html>
